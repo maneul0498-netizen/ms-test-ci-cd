@@ -12,7 +12,7 @@ pipeline {
             steps {
 
                 git branch: 'main',
-                url: 'https://github.com/maneul0498-netizen/ms-test-ci-cd
+                url: 'https://github.com/maneul0498-netizen/ms-test-ci-cd'
             }
         }
 
