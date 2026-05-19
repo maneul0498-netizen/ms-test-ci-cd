@@ -11,8 +11,6 @@ pipeline {
         stage('Checkout') {
             steps {
 
-                deleteDir()
-
                 git branch: 'main',
                 url: 'https://github.com/maneul0498-netizen/ms-test-ci-cd
             }
