@@ -178,7 +178,9 @@ pipeline {
 
             steps {
                 sh '''
-                    curl -X POST http://localhost:8081/users \
+                    docker network connect mono-repo_default jenkins || true
+
+                    curl -X POST http://mono-repo_user-service_1:8081/users \
                     -H "Content-Type: application/json" \
                     -d '{"name":"manuel"}'
                 '''
