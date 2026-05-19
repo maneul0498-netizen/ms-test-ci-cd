@@ -45,7 +45,7 @@ func main() {
 
 	http.HandleFunc("/users", createUser)
 
-	log.Println("user-service running on 8080")
+	log.Println("user-service running on 8081")
 
 	http.ListenAndServe(":8081", nil)
 }

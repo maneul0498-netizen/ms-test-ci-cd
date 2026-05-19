@@ -25,7 +25,7 @@ func main() {
 
 	http.HandleFunc("/notify", notify)
 
-	log.Println("notification-service running on 8081")
+	log.Println("notification-service running on 8082")
 
 	http.ListenAndServe(":8082", nil)
 }

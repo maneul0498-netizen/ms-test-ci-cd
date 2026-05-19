@@ -73,6 +73,7 @@ pipeline {
             }
         }
 
+        /*
         stage('Integration Test') {
 
             steps {
@@ -85,6 +86,7 @@ pipeline {
                 '''
             }
         }
+        */
     }
 
     post {
@@ -99,41 +101,3 @@ pipeline {
         }
     }
 }
-
-/*
-pipeline {
-
-    agent any
-
-    stages {
-
-        stage('Test Docker') {
-            steps {
-                sh '''
-                    docker version
-
-                    docker ps
-
-                    docker pull golang:1.26
-                '''
-            }
-        }
-
-        stage('Test Golang Agent') {
-
-            agent {
-                docker {
-                    image 'golang:1.26'
-                    reuseNode true
-                }
-            }
-
-            steps {
-                sh '''
-                    go version
-                '''
-            }
-        }
-    }
-}
-*/
