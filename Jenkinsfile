@@ -14,7 +14,7 @@ pipeline {
                 deleteDir()
 
                 git branch: 'main',
-                url: 'https://github.com/TU_USUARIO/monorepo.git'
+                url: 'https://github.com/maneul0498-netizen/monorepo.git'
             }
         }
 
