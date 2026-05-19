@@ -79,7 +79,7 @@ pipeline {
                 sh '''
                     sleep 5
 
-                    curl -X POST http://localhost:8080/users \
+                    curl -X POST http://localhost:8081/users \
                     -H "Content-Type: application/json" \
                     -d '{"name":"manuel"}'
                 '''
