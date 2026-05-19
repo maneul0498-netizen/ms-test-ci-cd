@@ -1,4 +1,3 @@
-/*
 pipeline {
 
     agent any
@@ -16,32 +15,6 @@ pipeline {
 
                 git branch: 'main',
                 url: 'https://github.com/maneul0498-netizen/ms-test-ci-cd'
-            }
-        }
-
-        stage('Debug') {
-            steps {
-                sh '''
-                    pwd
-
-                    ls -la
-
-                    docker version
-
-                    docker compose version
-                '''
-            }
-        }
-
-        stage('Debug Services') {
-            steps {
-                sh '''
-                    ls -la
-
-                    ls -la user-service
-
-                    ls -la notification-service
-                '''
             }
         }
 
@@ -93,9 +66,9 @@ pipeline {
 
             steps {
                 sh '''
-                    docker compose down || true
+                    docker-compose down || true
 
-                    docker compose up -d --build
+                    docker-compose up -d --build
                 '''
             }
         }
@@ -119,15 +92,15 @@ pipeline {
         always {
 
             sh '''
-                docker compose logs
+                docker-compose logs
 
-                docker compose down
+                docker-compose down
             '''
         }
     }
 }
-*/
 
+/*
 pipeline {
 
     agent any
@@ -163,3 +136,4 @@ pipeline {
         }
     }
 }
+*/
