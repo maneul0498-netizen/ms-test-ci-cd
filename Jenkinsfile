@@ -18,6 +18,32 @@ pipeline {
             }
         }
 
+        stage('Debug') {
+            steps {
+                sh '''
+                    pwd
+
+                    ls -la
+
+                    docker version
+
+                    docker compose version
+                '''
+            }
+        }
+
+        stage('Debug Services') {
+            steps {
+                sh '''
+                    ls -la
+
+                    ls -la user-service
+
+                    ls -la notification-service
+                '''
+            }
+        }
+
         stage('Build user-service') {
 
             agent {
