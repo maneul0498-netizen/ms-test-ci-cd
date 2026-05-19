@@ -1,0 +1,13 @@
+services:
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - notification-service
+
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "8082:8082"
