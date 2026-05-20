@@ -181,7 +181,7 @@ pipeline {
             curl -v \
                     -H "Content-Type: application/json" \
                     -d "{\"name\":\"manuel\"}" \
-                    http://user-service:8081/users
+                    http://mono-repo_user-service_1
             '''
             }
         }
