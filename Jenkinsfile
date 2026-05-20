@@ -177,12 +177,9 @@ pipeline {
         stage('Integration Test') {
 
             steps {
-                sh '''
-            curl -v \
-                    -H "Content-Type: application/json" \
-                    -d "{\"name\":\"manuel\"}" \
-                    http://mono-repo_user-service_1
-            '''
+                sh """
+                    curl -v http://mono-repo_user-service_1:8081/users
+                """
             }
         }
     }
