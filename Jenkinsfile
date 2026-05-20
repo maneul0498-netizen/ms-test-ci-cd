@@ -178,7 +178,7 @@ pipeline {
 
             steps {
                 sh """
-                    curl -v http://mono-repo_user-service_1:8081/users
+                    curl -v http://host.docker.internal:8081/users
                 """
             }
         }
