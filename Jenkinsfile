@@ -177,8 +177,14 @@ pipeline {
         stage('Integration Test') {
 
             steps {
+
+
                 sh """
-                    curl -v http://host.docker.internal:8081/users
+                    curl -v \
+                    -H 'Content-Type: application/json' \
+                    -d '{\"name\":\"manuel\"}' \
+                    http://host.docker.internal:8081/users
+
                 """
             }
         }
