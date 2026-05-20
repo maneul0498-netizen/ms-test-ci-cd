@@ -113,6 +113,7 @@ pipeline {
             }
         }
 
+        /*
         stage('Deploy') {
 
             steps {
@@ -124,12 +125,12 @@ pipeline {
 
                         git pull origin main &&
 
-
                         docker-compose up -d --build
                     '
                 '''
             }
         }
+        */
     }
 
     post {
