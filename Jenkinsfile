@@ -18,6 +18,21 @@ pipeline {
             }
         }
 
+        stage('Test notification-service') {
+
+            steps {
+
+                sh '''
+                    mkdir -p $GOCACHE
+
+                    cd notification-service
+
+                    go test -v ./...
+                '''
+            }
+        }
+
+
         stage('Build user-service') {
             steps {
                 sh '''
@@ -42,20 +57,6 @@ pipeline {
                     go mod tidy
 
                     go build -o app .
-                '''
-            }
-        }
-
-        stage('Test notification-service') {
-
-            steps {
-
-                sh '''
-                    mkdir -p $GOCACHE
-
-                    cd notification-service
-
-                    go test -v ./...
                 '''
             }
         }

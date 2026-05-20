@@ -1,6 +1,11 @@
 package main
 
-import "testing"
+import (
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+)
 
 func TestMessa(t *testing.T) {
 	s := Message("manuel")
@@ -9,4 +14,40 @@ func TestMessa(t *testing.T) {
 		t.Fatal()
 	}
 
+}
+
+func TestNotifyEndpoint(t *testing.T) {
+
+	body := `{"name":"manuel"}`
+
+	req := httptest.NewRequest(
+		http.MethodPost,
+		"/notify",
+		strings.NewReader(body),
+	)
+
+	req.Header.Set("Content-Type", "application/json")
+
+	rr := httptest.NewRecorder()
+
+	handler := http.HandlerFunc(notify)
+
+	handler.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Errorf(
+			"expected status 200 but got %d",
+			rr.Code,
+		)
+	}
+
+	expected := "notification sent to manuel"
+
+	if strings.TrimSpace(rr.Body.String()) != expected {
+		t.Errorf(
+			"expected body %s but got %s",
+			expected,
+			rr.Body.String(),
+		)
+	}
 }
