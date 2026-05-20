@@ -46,12 +46,24 @@ pipeline {
             }
         }
 
+        stage('Test notification-service') {
+
+            steps {
+
+                sh '''
+                    mkdir -p $GOCACHE
+
+                    cd notification-service
+
+                    go test -v ./...
+                '''
+            }
+        }
+
         stage('Run Containers') {
 
             steps {
                 sh '''
-                    docker-compose down || true
-
                     CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
 
                     echo "=== CHANGED FILES ==="

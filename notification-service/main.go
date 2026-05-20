@@ -2,12 +2,17 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 )
 
 type User struct {
 	Name string `json:"name"`
+}
+
+func Message(s string) string {
+	return fmt.Sprintf("notification sent to %s", s)
 }
 
 func notify(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +23,7 @@ func notify(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("sending notification to:", user.Name)
 
-	w.Write([]byte("notification sent"))
+	w.Write([]byte(Message(user.Name)))
 }
 
 func main() {
