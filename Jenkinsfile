@@ -113,6 +113,24 @@ pipeline {
             }
         }
     }
+        stage('Deploy') {
+
+            steps {
+
+                sh '''
+                    ssh maneul@192.168.1.103 '
+
+                        cd $HOME/Go/jenkins/ssh_jenkins/ms-test-ci-cd &&
+
+                        git pull origin main &&
+
+                        docker-compose down &&
+
+                        docker-compose up -d --build
+                    '
+                '''
+            }
+        }
 
     post {
 
