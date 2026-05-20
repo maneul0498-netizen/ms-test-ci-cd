@@ -142,7 +142,7 @@ pipeline {
 
                 docker-compose logs
 
-                docker-compose down
+                # docker-compose down
             '''
         }
     }
