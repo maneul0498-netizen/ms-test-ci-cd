@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestMessa(t *testing.T) {
+func TestMessage(t *testing.T) {
 	s := Message("manuel")
 
 	if s != "notification sent to manuel" {
