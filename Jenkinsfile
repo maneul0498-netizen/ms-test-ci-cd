@@ -118,9 +118,9 @@ pipeline {
             steps {
 
                 sh '''
-                    ssh maneul@192.168.1.103 '
+                    ssh maneul@192.168.1.102 '
 
-                        cd $HOME/Go/jenkins/ssh_jenkins/ms-test-ci-cd &&
+                        cd $HOME/server/ms-test-ci-cd &&
 
                         git pull origin main &&
 
@@ -142,7 +142,7 @@ pipeline {
 
                 docker-compose logs
 
-                # docker-compose down
+                docker-compose down
             '''
         }
     }
