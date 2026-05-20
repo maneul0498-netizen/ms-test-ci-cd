@@ -1,107 +1,3 @@
-/*
-pipeline {
-
-    agent any
-
-    environment {
-        GOCACHE = "${WORKSPACE}/.gocache"
-    }
-
-    stages {
-
-        stage('Checkout') {
-            steps {
-
-                deleteDir()
-
-                git branch: 'main',
-                url: 'https://github.com/maneul0498-netizen/ms-test-ci-cd'
-            }
-        }
-
-        stage('Build user-service') {
-
-            agent {
-                docker {
-                    image 'golang:1.26'
-                    reuseNode true
-                }
-            }
-
-            steps {
-                sh '''
-                    mkdir -p $GOCACHE
-
-                    cd user-service
-
-                    go mod tidy
-
-                    go build -o app .
-                '''
-            }
-        }
-
-        stage('Build notification-service') {
-
-            agent {
-                docker {
-                    image 'golang:1.26'
-                    reuseNode true
-                }
-            }
-
-            steps {
-                sh '''
-                    mkdir -p $GOCACHE
-
-                    cd notification-service
-
-                    go mod tidy
-
-                    go build -o app .
-                '''
-            }
-        }
-
-        stage('Run Containers') {
-
-            steps {
-                sh '''
-                    docker-compose down || true
-
-                    docker-compose up -d --build
-                '''
-            }
-        }
-
-        stage('Integration Test') {
-
-            steps {
-                sh '''
-                    sleep 5
-
-                    curl -X POST http://localhost:8081/users \
-                    -H "Content-Type: application/json" \
-                    -d '{"name":"manuel"}'
-                '''
-            }
-        }
-    }
-
-    post {
-
-        always {
-
-            sh '''
-                docker-compose logs
-
-                docker-compose down
-            '''
-        }
-    }
-}
-*/
-
 pipeline {
 
     agent any
@@ -156,7 +52,22 @@ pipeline {
                 sh '''
                     docker-compose down || true
 
-                    docker-compose up -d --build
+                    CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+
+                    echo "=== CHANGED FILES ==="
+                    echo "$CHANGED_FILES"
+
+                    if echo "$CHANGED_FILES" | grep '^user-service/'; then
+                        echo "Building user-service..."
+                        docker-compose build user-service
+                    fi
+
+                    if echo "$CHANGED_FILES" | grep '^notification-service/'; then
+                        echo "Building notification-service..."
+                        docker-compose build notification-service
+                    fi
+
+                    docker-compose up -d
 
                     docker ps
                 '''
