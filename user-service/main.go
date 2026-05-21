@@ -36,6 +36,7 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//comentario
 	w.WriteHeader(http.StatusCreated)
 
 	w.Write([]byte("user created"))
